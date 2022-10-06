@@ -367,16 +367,29 @@ def generate(_table: Table, _cue: CueBall, _ghost: GhostBall, _called: CalledBal
         draw.line(xy=item.get_trajectory(itemList[i + 1].get_coordinates()), fill='white')
 
     # Perspective warp the image
-    img = img.transform((WIDTH, HEIGHT), Image.Transform.PERSPECTIVE, coefficients, Image.Resampling.BICUBIC)
+    img = img.transform((WIDTH, HEIGHT), Image.PERSPECTIVE, coefficients, Image.BICUBIC)
 
     return img
 
 
-def main(string: str):
+def run(string: str) -> None:
+    """Drives the image generation script.
+
+        Args:
+            string (str): The string representation of the drill.
+
+        Returns:
+            None
+    """
+    # Instantiate Table object
     table = Table(width=WIDTH)
+    # Parse string representation to obtain drill parameters
     cue, ghost, called, pocket = parse(string, table.get_scale())
-    generate(table, cue, ghost, called, pocket)
+    # Generate image
+    image = generate(table, cue, ghost, called, pocket)
+    # Save image
+    image.save('drill.png')
 
 
 if __name__ == '__main__':
-    main('072.4188,166.2855;031.2016,035.1107;027.4153,030.8499;000.0,000.0;00120025')
+    run('072.4188,166.2855;031.2016,035.1107;027.4153,030.8499;000.0,000.0;00120025')
