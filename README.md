@@ -29,4 +29,4 @@ Senior Design Project.
         +--- README.md
 ```
 
-All the functions are intended to run on a Raspberry Pi.
+All functions are intended to run on a Raspberry Pi.
